@@ -1,8 +1,8 @@
 <H3>ENTER YOUR NAME</H3>
 <H3>ENTER YOUR REGISTER NO.</H3>
 <H3>EX. NO.1</H3>
-<H3>DATE</H3>
-<H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
+<H3>DATE:25-07-2026</H3>
+<H1 ALIGN- =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
 ## AIM:
 
@@ -37,11 +37,88 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
+```python
+import pandas as pd
+import io
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
 
+#Read the dataset from drive
+df = pd.read_csv("dataset_2191_sleep.csv");
+print(df)
+```
+```python
+#split the dataset
+X = df.iloc[:, :-1].values
+
+y = df.iloc[:, -1].values
+
+print(X)
+print(y)
+```
+```python
+#Finding Missing Values
+print(df.isnull().sum())
+```
+```python
+#Handling Missing values
+df.fillna(df.select_dtypes(include='number').mean().round(1), inplace=True)
+y = df.iloc[:, -1].values
+```
+```python
+df.drop(['body_weight','max_life_span','total_sleep'], axis=1, inplace = True)
+df.info()
+```
+```python
+#Check for Duplicates
+df.duplicated()
+```
+```python
+#Detect Outliers
+print(df['Lead Streams (in millions)'].describe())
+```
+```python
+from sklearn.preprocessing import MinMaxScaler
+
+scaler = MinMaxScaler()
+
+# Select only numeric columns
+numeric_cols = df.select_dtypes(include=['int64', 'float64']).columns
+
+# Scale only numeric columns
+df[numeric_cols] = scaler.fit_transform(df[numeric_cols])
+
+print(df)
+```
+```python
+#splitting the data for training and testing
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.2)
+
+#'test_size = 0.2' means 20% test data and 80% train data
+print(X_train)
+print(len(X_train))
+print(X_test)
+print(len(X_test))
+```
 
 ## OUTPUT:
-SHOW YOUR OUTPUT HERE
+
+<img width="760" height="487" alt="image" src="https://github.com/user-attachments/assets/071f2087-0c04-4935-b7a3-c01d8a47731b" />
+
+<img width="527" height="416" alt="image" src="https://github.com/user-attachments/assets/06753e5e-fa76-4550-b910-625bc0c4c9ec" />
+
+<img width="881" height="386" alt="image" src="https://github.com/user-attachments/assets/c0d0cc69-2c7b-4de6-98a0-0969e18519ca" />
+
+<img width="828" height="226" alt="image" src="https://github.com/user-attachments/assets/52679420-a755-42b5-8595-1831ae1cc571" />
+
+<img width="260" height="458" alt="image" src="https://github.com/user-attachments/assets/dbd714b3-9bea-440b-ae7d-74da7581f4e2" />
+
+<img width="1045" height="322" alt="image" src="https://github.com/user-attachments/assets/0fc586ec-a13c-499e-b922-8ca446ab4437" />
+
+<img width="682" height="486" alt="image" src="https://github.com/user-attachments/assets/3deb86b7-3368-42bc-a7c3-e62d3ae8edfa" />
+
+<img width="445" height="495" alt="image" src="https://github.com/user-attachments/assets/86e33bb9-eb69-4011-8b62-a1f75ab4ccfa" />
 
 
 ## RESULT:
